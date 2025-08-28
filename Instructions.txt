@@ -1,0 +1,72 @@
+﻿## Phase 1: Building the Programs from Code
+First, you need to compile the source code into executable (.exe) files.
+
+Prerequisites: Make sure you have Visual Studio installed with the .NET desktop development workload.
+
+Open the Solution: Find the solution file (e.g., UsbSecurityKey.sln) and double-click it to open the entire project in Visual Studio.
+
+Build the Solution: In the top menu bar of Visual Studio, click Build -> Build Solution. This will compile both the UsbSecurityKey and the ProvisioningTool projects.
+
+Locate the Files: After the build succeeds, you'll find the executable files in their respective project folders.
+
+The key maker is at: ProvisioningTool\bin\Debug\ProvisioningTool.exe
+
+The security guard is at: UsbSecurityKey\bin\Debug\UsbSecurityKey.exe
+
+## Phase 2: Creating Your Key (One-Time Setup)
+This phase uses the ProvisioningTool to turn your USB drive into a security key.
+
+Insert Your USB Drive: Plug a USB flash drive that you are okay with erasing into your computer. Back up any important data from it first!
+
+Run the Provisioning Tool: Navigate to the ProvisioningTool\bin\Debug folder and double-click ProvisioningTool.exe. A console window will appear.
+
+Select the Drive: The tool will list all available removable drives. Type the number corresponding to your USB drive and press Enter.
+
+Confirm Formatting: The tool will warn you that the drive will be prepared for use. Press y to confirm.
+
+Create a Password: You'll be prompted to enter a password. This password encrypts the secret key on the drive. Type a strong password and press Enter.
+
+Verification: The tool will automatically perform all the necessary steps: renaming the drive, generating cryptographic keys, and saving the files. When it's finished, you'll see a "SUCCESS!" message.
+
+Your USB drive is now a provisioned security key, containing the files public.key, private.key, and password.txt.
+
+## Phase 3: Running the Security Application
+Now you can run the main application that locks your PC.
+
+Run the Application: Navigate to the UsbSecurityKey\bin\Debug folder and double-click UsbSecurityKey.exe.
+
+Check the System Tray: No window will open. Instead, look in your system tray (the area by the clock in the bottom-right of your screen).
+You will see a new icon.
+
+Yellow Warning Shield: This means the application is running, but your security key is not plugged in or authenticated.
+
+Blue "i" Icon: This means your key is plugged in and successfully authenticated. Your computer is secure.
+
+Interact with the App: You can right-click the icon to bring up a small menu. The only option is Exit, which you can use to close the 
+application completely.
+
+## Phase 4: Your New Daily Workflow 🚶‍♂️
+Using the application day-to-day is incredibly simple.
+
+When you're working: Keep the provisioned USB key plugged into your computer. The application will continuously verify it's there, 
+and your computer will function normally.
+
+When you leave your desk: Simply unplug the USB drive. Your workstation will instantly lock, preventing anyone from accessing it.
+
+When you return: Plug the USB drive back in. Then, log into Windows using your normal password or PIN. The security application will 
+automatically re-authenticate your key in the background.
+
+### Pro Tip: Start Automatically with Windows
+To avoid having to manually start the application every day, you can make it launch automatically when you log in.
+
+Press Windows Key + R to open the Run dialog.
+
+Type shell:startup and press Enter. This will open your personal Startup folder.
+
+Go back to the UsbSecurityKey\bin\Debug folder.
+
+Right-click on UsbSecurityKey.exe and select Create shortcut.
+
+Cut or copy this new shortcut and paste it into the Startup folder you opened in step 2.
+
+Now, the security application will start automatically every time you log into Windows.
